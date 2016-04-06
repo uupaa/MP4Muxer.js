@@ -57,7 +57,6 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
 
     if (videoNALUnit.length === 62 && audioDuration === 1.18421768707483) {
         var resultFile = "../assets/el/MP4Builder.build.mp4";
-        debugger;
 
         if (global.require) {
             require("fs").writeFileSync(resultFile, new Buffer(mp4file.stream.buffer), "binary"); // Finder で確認

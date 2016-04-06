@@ -1,6 +1,6 @@
 {
   "name": "uupaa.mp4muxer.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "MP4 Muxer",
   "url": "https://github.com/uupaa/MP4Muxer.js",
   "keywords": ["AVC", "MP4", "H.264", "Muxer", "uupaa", "WebModule", "Unstable"],
