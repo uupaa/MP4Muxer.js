@@ -69,16 +69,17 @@
     }
   },
   "dependencies": {
-    "uupaa.bit.js": "",
-    "uupaa.hexdump.js": "",
-    "uupaa.nalunit.js": ""
+    "uupaa.nalunit.js": "",
+    "uupaa.mp4parser.js": ""
   },
   "devDependencies": {
+    "uupaa.adts.js": "",
     "uupaa.task.js": "",
     "uupaa.fileloader.js": "",
     "uupaa.h264.js": "",
     "uupaa.mpeg2ts.js": "",
     "uupaa.mp4parser.js": "",
+    "uupaa.mp4builder.js": "",
     "uupaa.mpeg4bytestream.js": ""
   },
   "lib": "./lib/",
