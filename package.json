@@ -85,6 +85,6 @@
   "lib": "./lib/",
   "main": "./index.js",
   "author": "uupaa",
-  "license": "MIT",
+  "license": "Apache License Version 2.0",
   "contributors": []
 }
