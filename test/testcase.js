@@ -37,7 +37,6 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
     MP4Muxer.VERBOSE = false;
     NALUnitAUD.VERBOSE = false;
 
-debugger;
     var mpeg2ts         = MPEG2TS.parse( u8a );
 
     //  1. 先にAudio をデコードし、duration を取得する
@@ -50,20 +49,19 @@ debugger;
     //      - audioMetaData.duration が 1.18421768707483 で Samples.length が 62 なら 1.18421768707483 / 62 = 0.0191002852754 を設定する
     var videoByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["VIDEO_TS_PACKET"] );
     var videoNALUnit    = MPEG4ByteStream.convertByteStreamToNALUnitObjectArray( videoByteStream );
-debugger;
     var mp4tree         = MP4Muxer.mux( videoNALUnit, { audioMetaData: audioMetaData } );
-    var mp4file         = MP4Builder.build(mp4tree);
+    var mp4file         = MP4Builder.build(mp4tree, { fastStart: true, diagnostic: true }); // { stream, diagnostic }
 
   //var diagnostic      = mp4tree.diagnostic();
   //var json            = mp4tree.dump();
 
     if (videoNALUnit.length === 62 && audioDuration === 1.18421768707483) {
-        var resultFile = "mp4.result.mp4";
+        var resultFile = "../assets/el/MP4Builder.build.mp4";
         debugger;
 
         if (global.require) {
-            require("fs").writeFileSync(resultFile, new Buffer(mp4file.buffer), "binary"); // Finder で確認
-            console.log("WRITE TO: ", resultFile, mp4file.length);
+            require("fs").writeFileSync(resultFile, new Buffer(mp4file.stream.buffer), "binary"); // Finder で確認
+            console.log("WRITE TO: ", resultFile, mp4file.stream.length);
         }
         test.done(pass());
     } else {
