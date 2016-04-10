@@ -31,6 +31,7 @@ require("../../node_modules/uupaa.mpeg2ts.js/lib/MPEG2TS.js");
 require("../../node_modules/uupaa.mp4parser.js/node_modules/uupaa.typedarray.js/lib/TypedArray.js");
 require("../../node_modules/uupaa.mp4parser.js/lib/MP4Parser.js");
 require("../../node_modules/uupaa.mp4builder.js/lib/MP4Builder.js");
+require("../../node_modules/uupaa.h264profile.js/lib/H264Profile.js");
 require("../wmtools.js");
 require("../../lib/MP4Muxer.js");
 require("../../release/MP4Muxer.n.min.js");

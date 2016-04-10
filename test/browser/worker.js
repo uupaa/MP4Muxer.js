@@ -43,6 +43,7 @@ onmessage = function(event) {
     importScripts("../../node_modules/uupaa.mp4parser.js/node_modules/uupaa.typedarray.js/lib/TypedArray.js");
     importScripts("../../node_modules/uupaa.mp4parser.js/lib/MP4Parser.js");
     importScripts("../../node_modules/uupaa.mp4builder.js/lib/MP4Builder.js");
+    importScripts("../../node_modules/uupaa.h264profile.js/lib/H264Profile.js");
     importScripts("../wmtools.js");
     importScripts("../../lib/MP4Muxer.js");
     importScripts("../../release/MP4Muxer.w.min.js");

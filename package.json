@@ -1,6 +1,6 @@
 {
   "name": "uupaa.mp4muxer.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "MP4 Muxer",
   "url": "https://github.com/uupaa/MP4Muxer.js",
   "keywords": ["AVC", "MP4", "H.264", "Muxer", "uupaa", "WebModule", "Unstable"],
@@ -70,7 +70,8 @@
   },
   "dependencies": {
     "uupaa.nalunit.js": "",
-    "uupaa.mp4parser.js": ""
+    "uupaa.mp4parser.js": "",
+    "uupaa.h264profile.js": ""
   },
   "devDependencies": {
     "uupaa.adts.js": "",
