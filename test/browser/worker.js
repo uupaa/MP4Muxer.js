@@ -18,10 +18,11 @@ onmessage = function(event) {
     WebModule.VERBOSE = true;
     WebModule.PUBLISH = true;
 
-    importScripts("../../node_modules/uupaa.adts.js/node_modules/uupaa.hash.js/node_modules/uupaa.bit.js/lib/Bit.js");
-    importScripts("../../node_modules/uupaa.adts.js/node_modules/uupaa.hash.js/node_modules/uupaa.bit.js/lib/BitView.js");
-    importScripts("../../node_modules/uupaa.adts.js/node_modules/uupaa.hash.js/lib/Hash.js");
-    importScripts("../../node_modules/uupaa.adts.js/lib/ADTS.js");
+    importScripts("../../node_modules/uupaa.aac.js/node_modules/uupaa.bit.js/lib/Bit.js");
+    importScripts("../../node_modules/uupaa.aac.js/node_modules/uupaa.bit.js/lib/BitView.js");
+    importScripts("../../node_modules/uupaa.aac.js/node_modules/uupaa.hash.js/lib/Hash.js");
+    importScripts("../../node_modules/uupaa.aac.js/lib/ADTS.js");
+    importScripts("../../node_modules/uupaa.aac.js/lib/AAC.js");
     importScripts("../../node_modules/uupaa.task.js/lib/Task.js");
     importScripts("../../node_modules/uupaa.task.js/lib/TaskMap.js");
     importScripts("../../node_modules/uupaa.fileloader.js/lib/FileLoader.js");

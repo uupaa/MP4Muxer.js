@@ -6,10 +6,11 @@ WebModule.VERIFY  = true;
 WebModule.VERBOSE = true;
 WebModule.PUBLISH = true;
 
-require("../../node_modules/uupaa.adts.js/node_modules/uupaa.hash.js/node_modules/uupaa.bit.js/lib/Bit.js");
-require("../../node_modules/uupaa.adts.js/node_modules/uupaa.hash.js/node_modules/uupaa.bit.js/lib/BitView.js");
-require("../../node_modules/uupaa.adts.js/node_modules/uupaa.hash.js/lib/Hash.js");
-require("../../node_modules/uupaa.adts.js/lib/ADTS.js");
+require("../../node_modules/uupaa.aac.js/node_modules/uupaa.bit.js/lib/Bit.js");
+require("../../node_modules/uupaa.aac.js/node_modules/uupaa.bit.js/lib/BitView.js");
+require("../../node_modules/uupaa.aac.js/node_modules/uupaa.hash.js/lib/Hash.js");
+require("../../node_modules/uupaa.aac.js/lib/ADTS.js");
+require("../../node_modules/uupaa.aac.js/lib/AAC.js");
 require("../../node_modules/uupaa.task.js/lib/Task.js");
 require("../../node_modules/uupaa.task.js/lib/TaskMap.js");
 require("../../node_modules/uupaa.fileloader.js/lib/FileLoader.js");

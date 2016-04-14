@@ -40,21 +40,16 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
 
     var mpeg2ts         = MPEG2TS.parse( u8a );
 
-    //  1. 先にAudio をデコードし、duration を取得する
+    //  decode audio, get duration.
     var audioByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["AUDIO_TS_PACKET"] );
     var audioMetaData   = ADTS.parse( audioByteStream );
     var audioDuration   = audioMetaData.duration;
 
-    //  2. 次にVidoe をデコードし、フレーム(Sample)数を得る
-    //      - stts の sample_duration には、Sample数(AccessUnit) 割る AAC.duration の値を設定する(つまり均等割りをする)
-    //      - audioMetaData.duration が 1.18421768707483 で Samples.length が 62 なら 1.18421768707483 / 62 = 0.0191002852754 を設定する
+    //  decode video, get Sample.length
     var videoByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["VIDEO_TS_PACKET"] );
     var videoNALUnit    = MPEG4ByteStream.convertByteStreamToNALUnitObjectArray( videoByteStream );
     var mp4tree         = MP4Muxer.mux( videoNALUnit, { audioMetaData: audioMetaData } );
     var mp4file         = MP4Builder.build(mp4tree, { fastStart: true, diagnostic: true }); // { stream, diagnostic }
-
-  //var diagnostic      = mp4tree.diagnostic();
-  //var json            = mp4tree.dump();
 
     if (videoNALUnit.length === 62 && audioDuration === 1.18421768707483) {
         var resultFile = "../assets/el/MP4Builder.build.mp4";
@@ -67,71 +62,7 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
     } else {
         test.done(miss());
     }
-    // MediaInfo だと duration は 1.75 sec になる。
-    // ffprobe だと 1.24 secとなるが、
-    // AAC duration は 1.184 sec
-    //
-    // MediaInfo の 1.75 sec は、TSに埋め込まれたPCRから求めた値と一致する。115678692000(4284.396 sec) - 115710417000(4285.571 sec) = 1.75 sec
-    //
 }
-
-/* あとで
-function testMP4Muxer(test, pass, miss) {
-    //  ff/png.all.mp4.00.ts を MPEG2TS.parse で demux し MP4Mux.mux -> MP4Builder.build して stbl 以下を正しく構築し再生可能な事を確認する
-    //  ff/png.all.mp4.00.ts.mp4 と同様の mp4 になる事を期待する
-
-    var sourceFile = "../assets/ff/png.all.mp4.00.ts";
-    var resultFile = "../assets/js/png.all.mp4.00.ts.mp4";
-    var verifyFile = "../assets/ff/png.all.mp4.00.ts.mp4";
-
-    FileLoader.toArrayBuffer(sourceFile, function(buffer) {
-        console.log("testMP4Muxer: ", sourceFile, buffer.byteLength);
-
-        //MPEG2TS.VERBOSE = false;
-        //MPEG2TSParser.VERBOSE = false;
-        MPEG4ByteStream.VERBOSE = false;
-        MP4Muxer.VERBOSE = false;
-        NALUnitEBSP.VERBOSE = false
-
-        var mpeg2ts         = MPEG2TS.parse( new Uint8Array(buffer) );
-
-        var videoByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["VIDEO_TS_PACKET"] );
-        var videoNALUnit    = MPEG4ByteStream.convertByteStreamToNALUnitObjectArray( videoByteStream );
-debugger;
-        var mp4tree         = MP4Muxer.mux( videoNALUnit );
-debugger;
-        var diagnostic = mp4tree.diagnostic();
-        var json = mp4tree.dump();
-
-        console.info(json);
-        console.info(diagnostic);
-
-
-
-        var mp4file         = MP4Builder.build(mp4tree);
-
-        if (global.require) {
-            require("fs").writeFileSync(resultFile, new Buffer(mp4file.buffer), "binary"); // Finder で確認
-            console.log("WRITE TO: ", resultFile, mp4file.length);
-        }
-
-        FileLoader.toArrayBuffer(verifyFile, function(buffer) {
-            var ffmpeg = new Uint8Array(buffer);
-            var jsmpeg = new Uint8Array(mp4file.buffer);
-
-            console.log("LOAD VERIFY FILE: ", verifyFile, buffer.byteLength);
-
-            if ( _binaryCompare(ffmpeg, jsmpeg) ) {
-                test.done(pass());
-            } else {
-                test.done(miss());
-            }
-        });
-    }, function(error) {
-        console.error(error.message);
-    });
-}
- */
 
 return test.run();
 
