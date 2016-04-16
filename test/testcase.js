@@ -49,12 +49,13 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
     var videoByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["VIDEO_TS_PACKET"] );
     var videoNALUnit    = MPEG4ByteStream.convertByteStreamToNALUnitObjectArray( videoByteStream );
     var mp4tree         = MP4Muxer.mux( videoNALUnit, { audioMetaData: audioMetaData } );
-    var mp4file         = MP4Builder.build(mp4tree, { fastStart: true, diagnostic: true }); // { stream, diagnostic }
+    var mp4file         = MP4Builder.build(mp4tree); // { stream, diagnostic }
 
     if (videoNALUnit.length === 62 && audioDuration === 1.18421768707483) {
         var resultFile = "../assets/el/MP4Builder.build.mp4";
 
         if (global.require) {
+            // cmp -b -l a.mp4 b.mp4
             require("fs").writeFileSync(resultFile, new Buffer(mp4file.stream.buffer), "binary"); // Finder で確認
             console.log("WRITE TO: ", resultFile, mp4file.stream.length);
         }
