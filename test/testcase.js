@@ -42,13 +42,13 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
 
     //  decode audio, get duration.
     var audioByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["AUDIO_TS_PACKET"] );
-    var audioMetaData   = ADTS.parse( audioByteStream );
-    var audioDuration   = audioMetaData.duration;
+    var adts            = ADTS.parse( audioByteStream );
+    var audioDuration   = adts.duration;
 
     //  decode video, get Sample.length
     var videoByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["VIDEO_TS_PACKET"] );
     var videoNALUnit    = MPEG4ByteStream.convertByteStreamToNALUnitObjectArray( videoByteStream );
-    var mp4tree         = MP4Muxer.mux( videoNALUnit, { audioMetaData: audioMetaData } );
+    var mp4tree         = MP4Muxer.mux( videoNALUnit, { audioDuration: audioDuration } );
     var mp4file         = MP4Builder.build(mp4tree); // { stream, diagnostic }
 
     if (videoNALUnit.length === 62 && audioDuration === 1.18421768707483) {
