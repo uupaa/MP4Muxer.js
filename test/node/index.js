@@ -29,8 +29,8 @@ require("../../node_modules/uupaa.h264.js/node_modules/uupaa.nalunit.js/lib/NALU
 require("../../node_modules/uupaa.h264.js/node_modules/uupaa.nalunit.js/lib/NALUnitNON_IDR.js");
 require("../../node_modules/uupaa.h264.js/node_modules/uupaa.nalunit.js/lib/NALUnit.js");
 require("../../node_modules/uupaa.h264.js/lib/H264.js");
-require("../../node_modules/uupaa.mpeg2ts.js/node_modules/uupaa.mpeg4bytestream.js/lib/MPEG4ByteStream.js");
-require("../../node_modules/uupaa.mpeg2ts.js/lib/MPEG2TSParser.js");
+require("../../node_modules/uupaa.mpeg2ts.js/lib/MPEG2TSNALUnit.js");
+require("../../node_modules/uupaa.mpeg2ts.js/lib/MPEG2TSDemuxer.js");
 require("../../node_modules/uupaa.mpeg2ts.js/lib/MPEG2TS.js");
 require("../../node_modules/uupaa.mp4parser.js/node_modules/uupaa.typedarray.js/lib/TypedArray.js");
 require("../../node_modules/uupaa.mp4parser.js/lib/MP4Parser.js");

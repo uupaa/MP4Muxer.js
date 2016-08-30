@@ -31,23 +31,21 @@ function testMP4Muxe_video_and_audio_mixed(test, pass, miss) {
     var u8a     = TypedArray.fromString( global.atob(bin) );
 
     MPEG2TS.VERBOSE = false;
-    MPEG2TSParser.VERBOSE = false;
-    MPEG4ByteStream.VERBOSE = false;
+    MPEG2TSDemuxer.VERBOSE = false;
     NALUnitEBSP.VERBOSE = false
     ADTS.VERBOSE = false;
     MP4Muxer.VERBOSE = false;
     NALUnitAUD.VERBOSE = false;
 
-    var mpeg2ts         = MPEG2TS.parse( u8a );
+    var mpeg2ts         = MPEG2TS.demux( u8a );
 
     //  decode audio, get duration.
-    var audioByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["AUDIO_TS_PACKET"] );
+    var audioByteStream = MPEG2TS.toByteStream( mpeg2ts["AUDIO_TS_PACKET"] );
     var adts            = ADTS.parse( audioByteStream );
     var audioDuration   = adts.duration;
 
     //  decode video, get Sample.length
-    var videoByteStream = MPEG2TS.convertTSPacketToByteStream( mpeg2ts["VIDEO_TS_PACKET"] );
-    var videoNALUnit    = MPEG4ByteStream.convertByteStreamToNALUnitObjectArray( videoByteStream );
+    var videoNALUnit    = MPEG2TS.toNALUnit( mpeg2ts["VIDEO_TS_PACKET"] );
     var mp4tree         = MP4Muxer.mux( videoNALUnit, { audioDuration: audioDuration } );
     var mp4file         = MP4Builder.build(mp4tree); // { stream, diagnostic }
 
